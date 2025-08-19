@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthFlow AI Accelerator - Intelligent Healthcare Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Header with role selector and high contrast toggle -->
+    <header class="header">
+        <div class="container">
+            <div class="header__content">
+                <div class="header__brand">
+                    <h1 class="header__title">HealthFlow AI</h1>
+                    <p class="header__subtitle">Intelligent Healthcare Platform</p>
+                </div>
+                <div class="header__controls">
+                    <div class="accessibility-controls">
+                        <button id="contrastToggle" class="btn btn--outline btn--sm contrast-toggle" aria-label="Toggle high contrast mode">
+                            <span class="contrast-icon">🎨</span>
+                        </button>
+                    </div>
+                    <div class="role-selector">
+                        <label for="roleSelect" class="sr-only">Select Role</label>
+                        <select id="roleSelect" class="form-control role-select">
+                            <option value="patient">Patient Portal</option>
+                            <option value="provider">Provider Dashboard</option>
+                            <option value="admin">Admin Console</option>
+                        </select>
+                    </div>
+                    <div class="user-info">
+                        <img id="userAvatar" src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=150&h=150&fit=crop&crop=face" alt="User Avatar" class="user-avatar">
+                        <span id="userName" class="user-name">Khushi Thakur</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Patient Portal -->
+    <main id="patientPortal" class="main-content active">
+        <div class="container">
+            <div class="dashboard-header">
+                <h2>Welcome back, Khushi</h2>
+                <p>Your health is our priority. How can we help you today?</p>
+            </div>
+
+            <div class="portal-grid">
+                <!-- AI Chatbot Interface -->
+                <div class="portal-card chatbot-card">
+                    <div class="card__header">
+                        <h3>AI Health Assistant</h3>
+                        <span class="status status--success">Online</span>
+                    </div>
+                    <div class="chatbot-container">
+                        <div class="chat-messages" id="chatMessages">
+                            <div class="message bot-message">
+                                <div class="message-avatar">🤖</div>
+                                <div class="message-content">
+                                    <p>Hello Khushi! I'm your AI health assistant. I can help you with symptom assessment, appointment booking, or answer questions about your care. What would you like to do today?</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-input-area">
+                            <div class="quick-actions">
+                                <button class="quick-btn" data-action="symptoms" aria-label="Check symptoms">Check Symptoms</button>
+                                <button class="quick-btn" data-action="appointment" aria-label="Book appointment">Book Appointment</button>
+                                <button class="quick-btn" data-action="insurance" aria-label="Insurance information">Insurance Info</button>
+                            </div>
+                            <div class="chat-input-container">
+                                <input type="text" id="chatInput" class="chat-input" placeholder="Type your message or ask a question...">
+                                <button id="chatSend" class="chat-send-btn" aria-label="Send message">
+                                    <span>Send</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Appointment Management -->
+                <div class="portal-card">
+                    <div class="card__header">
+                        <h3>Your Appointments</h3>
+                        <button class="btn btn--primary btn--sm" id="bookAppointmentBtn" aria-label="Book new appointment">Book New</button>
+                    </div>
+                    <div class="appointments-list" id="appointmentsList">
+                        <div class="appointment-item upcoming">
+                            <div class="appointment-date">
+                                <span class="date-day">25</span>
+                                <span class="date-month">Aug</span>
+                            </div>
+                            <div class="appointment-details">
+                                <h4>Dr. Michael Chen</h4>
+                                <p>Cardiology • Follow-up</p>
+                                <p class="appointment-time">10:00 AM - Room 205</p>
+                            </div>
+                            <div class="appointment-status">
+                                <span class="status status--success">Confirmed</span>
+                            </div>
+                        </div>
+                        <div class="appointment-item pending">
+                            <div class="appointment-date">
+                                <span class="date-day">02</span>
+                                <span class="date-month">Sep</span>
+                            </div>
+                            <div class="appointment-details">
+                                <h4>Dr. Emily Rodriguez</h4>
+                                <p>Family Medicine • Annual Physical</p>
+                                <p class="appointment-time">2:30 PM - Room 101</p>
+                            </div>
+                            <div class="appointment-status">
+                                <span class="status status--warning">Pending</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Health Summary -->
+                <div class="portal-card">
+                    <div class="card__header">
+                        <h3>Health Summary</h3>
+                        <button class="btn btn--outline btn--sm" id="viewFullRecordBtn" aria-label="View full health record">View Full Record</button>
+                    </div>
+                    <div class="health-metrics">
+                        <div class="health-metric">
+                            <div class="metric-icon">🫀</div>
+                            <div class="metric-info">
+                                <span class="metric-label">Blood Pressure</span>
+                                <span class="metric-value">128/82 mmHg</span>
+                                <span class="metric-trend improving">Improving</span>
+                            </div>
+                        </div>
+                        <div class="health-metric">
+                            <div class="metric-icon">🩸</div>
+                            <div class="metric-info">
+                                <span class="metric-label">Blood Sugar</span>
+                                <span class="metric-value">145 mg/dL</span>
+                                <span class="metric-trend stable">Stable</span>
+                            </div>
+                        </div>
+                        <div class="health-conditions">
+                            <h4>Active Conditions</h4>
+                            <div class="condition-tags">
+                                <span class="condition-tag">Hypertension</span>
+                                <span class="condition-tag">Type 2 Diabetes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Provider Dashboard -->
+    <main id="providerDashboard" class="main-content">
+        <div class="container">
+            <div class="dashboard-header">
+                <h2>Provider Dashboard</h2>
+                <p>AI-powered insights for optimal patient care</p>
+            </div>
+
+            <!-- Navigation tabs for provider -->
+            <div class="provider-nav">
+                <button class="nav-tab active" data-tab="dashboard" aria-label="Dashboard view">Dashboard</button>
+                <button class="nav-tab" data-tab="edge-monitoring" aria-label="Edge monitoring view">Edge Monitoring</button>
+            </div>
+
+            <!-- Main Dashboard Tab -->
+            <div id="dashboardTab" class="tab-content active">
+                <div class="provider-grid">
+                    <!-- Patient Queue with AI Insights -->
+                    <div class="provider-card">
+                        <div class="card__header">
+                            <h3>Today's Patient Queue</h3>
+                            <div class="ai-indicator">
+                                <span class="ai-badge">AI Optimized</span>
+                            </div>
+                        </div>
+                        <div class="patient-queue">
+                            <div class="queue-item priority-high">
+                                <div class="patient-info">
+                                    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=150&h=150&fit=crop&crop=face" alt="Patient" class="patient-avatar">
+                                    <div class="patient-details">
+                                        <h4>Khushi Thakur</h4>
+                                        <p>10:00 AM • Hypertension Follow-up</p>
+                                        <div class="ai-insights">
+                                            <span class="insight-tag">🔴 BP trending up</span>
+                                            <span class="insight-tag">💊 Medication review needed</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="queue-actions">
+                                    <button class="btn btn--primary btn--sm" aria-label="Start visit with Khushi Thakur">Start Visit</button>
+                                </div>
+                            </div>
+                            <div class="queue-item">
+                                <div class="patient-info">
+                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Patient" class="patient-avatar">
+                                    <div class="patient-details">
+                                        <h4>John Miller</h4>
+                                        <p>10:30 AM • Routine Checkup</p>
+                                        <div class="ai-insights">
+                                            <span class="insight-tag">✅ Labs normal</span>
+                                            <span class="insight-tag">📋 Preventive care due</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="queue-actions">
+                                    <button class="btn btn--outline btn--sm" id="viewJohnChart" aria-label="View John Miller's chart">View Chart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Recommendations -->
+                    <div class="provider-card">
+                        <div class="card__header">
+                            <h3>AI Clinical Recommendations</h3>
+                            <span class="confidence-score">96.2% Accuracy</span>
+                        </div>
+                        <div class="recommendations-list">
+                            <div class="recommendation-item high-priority">
+                                <div class="recommendation-icon">⚠️</div>
+                                <div class="recommendation-content">
+                                    <h4>Medication Interaction Alert</h4>
+                                    <p>Patient Khushi Thakur: Potential interaction between current medications. Review required.</p>
+                                    <button class="btn btn--sm btn--outline" id="reviewDetailsBtn" aria-label="Review medication details">Review Details</button>
+                                </div>
+                            </div>
+                            <div class="recommendation-item">
+                                <div class="recommendation-icon">💡</div>
+                                <div class="recommendation-content">
+                                    <h4>Scheduling Optimization</h4>
+                                    <p>AI suggests rescheduling 2:00 PM slot for better workflow efficiency.</p>
+                                    <button class="btn btn--sm btn--secondary" id="applySuggestionBtn" aria-label="Apply scheduling suggestion">Apply Suggestion</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Schedule Management -->
+                    <div class="provider-card">
+                        <div class="card__header">
+                            <h3>Smart Schedule</h3>
+                            <button class="btn btn--outline btn--sm" id="optimizeSchedule" aria-label="AI optimize schedule">AI Optimize</button>
+                        </div>
+                        <div class="schedule-view">
+                            <div class="time-slots" id="timeSlots">
+                                <div class="time-slot occupied">
+                                    <span class="slot-time">9:00 AM</span>
+                                    <div class="slot-content">
+                                        <span class="patient-name">Emma Davis</span>
+                                        <span class="visit-type">Annual Physical</span>
+                                    </div>
+                                </div>
+                                <div class="time-slot occupied current">
+                                    <span class="slot-time">10:00 AM</span>
+                                    <div class="slot-content">
+                                        <span class="patient-name">Khushi Thakur</span>
+                                        <span class="visit-type">Follow-up</span>
+                                    </div>
+                                </div>
+                                <div class="time-slot occupied">
+                                    <span class="slot-time">10:30 AM</span>
+                                    <div class="slot-content">
+                                        <span class="patient-name">John Miller</span>
+                                        <span class="visit-type">Checkup</span>
+                                    </div>
+                                </div>
+                                <div class="time-slot available">
+                                    <span class="slot-time">11:00 AM</span>
+                                    <div class="slot-content">
+                                        <span class="slot-status">Available</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edge Monitoring Tab -->
+            <div id="edgeMonitoringTab" class="tab-content">
+                <div class="edge-monitoring-grid">
+                    <div class="monitoring-controls">
+                        <div class="provider-card">
+                            <div class="card__header">
+                                <h3>Edge Monitoring Control</h3>
+                                <div class="monitoring-status">
+                                    <span class="status status--info" id="monitoringStatus">Stopped</span>
+                                </div>
+                            </div>
+                            <div class="control-panel">
+                                <button class="btn btn--primary" id="startMonitoring" aria-label="Start edge monitoring">Start Monitoring</button>
+                                <button class="btn btn--outline" id="stopMonitoring" aria-label="Stop edge monitoring">Stop Monitoring</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="patient-monitors">
+                        <div class="provider-card monitor-card" data-patient="khushi">
+                            <div class="card__header">
+                                <h4>Khushi Thakur - ICU Bed 1</h4>
+                                <div class="monitor-status">
+                                    <span class="status status--success">Connected</span>
+                                </div>
+                            </div>
+                            <div class="vital-monitors">
+                                <div class="vital-display">
+                                    <span class="vital-label">Heart Rate</span>
+                                    <span class="vital-value" id="hr-khushi">--</span>
+                                    <span class="vital-unit">bpm</span>
+                                </div>
+                                <div class="vital-display">
+                                    <span class="vital-label">SpO2</span>
+                                    <span class="vital-value" id="spo2-khushi">--</span>
+                                    <span class="vital-unit">%</span>
+                                </div>
+                                <div class="vital-display">
+                                    <span class="vital-label">Blood Pressure</span>
+                                    <span class="vital-value" id="bp-khushi">--/--</span>
+                                    <span class="vital-unit">mmHg</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="provider-card monitor-card" data-patient="john">
+                            <div class="card__header">
+                                <h4>John Miller - ICU Bed 2</h4>
+                                <div class="monitor-status">
+                                    <span class="status status--success">Connected</span>
+                                </div>
+                            </div>
+                            <div class="vital-monitors">
+                                <div class="vital-display">
+                                    <span class="vital-label">Heart Rate</span>
+                                    <span class="vital-value" id="hr-john">--</span>
+                                    <span class="vital-unit">bpm</span>
+                                </div>
+                                <div class="vital-display">
+                                    <span class="vital-label">SpO2</span>
+                                    <span class="vital-value" id="spo2-john">--</span>
+                                    <span class="vital-unit">%</span>
+                                </div>
+                                <div class="vital-display">
+                                    <span class="vital-label">Blood Pressure</span>
+                                    <span class="vital-value" id="bp-john">--/--</span>
+                                    <span class="vital-unit">mmHg</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="provider-card monitor-card" data-patient="emma">
+                            <div class="card__header">
+                                <h4>Emma Davis - ICU Bed 3</h4>
+                                <div class="monitor-status">
+                                    <span class="status status--success">Connected</span>
+                                </div>
+                            </div>
+                            <div class="vital-monitors">
+                                <div class="vital-display">
+                                    <span class="vital-label">Heart Rate</span>
+                                    <span class="vital-value" id="hr-emma">--</span>
+                                    <span class="vital-unit">bpm</span>
+                                </div>
+                                <div class="vital-display">
+                                    <span class="vital-label">SpO2</span>
+                                    <span class="vital-value" id="spo2-emma">--</span>
+                                    <span class="vital-unit">%</span>
+                                </div>
+                                <div class="vital-display">
+                                    <span class="vital-label">Blood Pressure</span>
+                                    <span class="vital-value" id="bp-emma">--/--</span>
+                                    <span class="vital-unit">mmHg</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alerts-panel">
+                        <div class="provider-card">
+                            <div class="card__header">
+                                <h3>Real-time Alerts</h3>
+                                <span id="alertCount" class="alert-counter">0 alerts</span>
+                            </div>
+                            <div class="alerts-list" id="edgeAlertsList">
+                                <div class="no-alerts">No alerts at this time</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Admin Console -->
+    <main id="adminConsole" class="main-content">
+        <div class="container">
+            <div class="dashboard-header">
+                <h2>System Administration</h2>
+                <p>Real-time monitoring and AI agent management</p>
+            </div>
+
+            <!-- Navigation tabs for admin -->
+            <div class="admin-nav">
+                <button class="nav-tab active" data-tab="system" aria-label="System overview">System Overview</button>
+                <button class="nav-tab" data-tab="edge-monitoring" aria-label="Edge monitoring overview">Edge Monitoring</button>
+            </div>
+
+            <!-- System Overview Tab -->
+            <div id="systemTab" class="tab-content active">
+                <div class="admin-grid">
+                    <!-- Real-time Analytics -->
+                    <div class="admin-card wide">
+                        <div class="card__header">
+                            <h3>Real-time System Analytics</h3>
+                            <div class="system-status">
+                                <span class="status status--success">All Systems Operational</span>
+                            </div>
+                        </div>
+                        <div class="analytics-dashboard">
+                            <div class="kpi-grid">
+                                <div class="kpi-item">
+                                    <span class="kpi-value" id="activeUsers">1,847</span>
+                                    <span class="kpi-label">Active Users</span>
+                                    <span class="kpi-change positive">+12%</span>
+                                </div>
+                                <div class="kpi-item">
+                                    <span class="kpi-value" id="appointmentsToday">45</span>
+                                    <span class="kpi-label">Appointments Today</span>
+                                    <span class="kpi-change positive">+8%</span>
+                                </div>
+                                <div class="kpi-item">
+                                    <span class="kpi-value" id="systemUptime">99.8%</span>
+                                    <span class="kpi-label">System Uptime</span>
+                                    <span class="kpi-change stable">Stable</span>
+                                </div>
+                                <div class="kpi-item">
+                                    <span class="kpi-value" id="aiAccuracy">97.4%</span>
+                                    <span class="kpi-label">AI Accuracy</span>
+                                    <span class="kpi-change positive">+2.1%</span>
+                                </div>
+                            </div>
+                            <div class="chart-container" style="position: relative; height: 300px;">
+                                <canvas id="systemMetricsChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Agents Management -->
+                    <div class="admin-card">
+                        <div class="card__header">
+                            <h3>Agentic AI Agents</h3>
+                            <span class="agents-count">4 Active</span>
+                        </div>
+                        <div class="agents-list">
+                            <div class="agent-item">
+                                <div class="agent-status active"></div>
+                                <div class="agent-info">
+                                    <h4>Scheduling Optimizer</h4>
+                                    <p>96.8% accuracy • 1,247 decisions</p>
+                                    <span class="agent-activity">Optimized 15 appointments</span>
+                                </div>
+                            </div>
+                            <div class="agent-item">
+                                <div class="agent-status active"></div>
+                                <div class="agent-info">
+                                    <h4>Patient Communicator</h4>
+                                    <p>94.2% accuracy • 892 decisions</p>
+                                    <span class="agent-activity">Sent 23 reminders</span>
+                                </div>
+                            </div>
+                            <div class="agent-item">
+                                <div class="agent-status active"></div>
+                                <div class="agent-info">
+                                    <h4>Resource Manager</h4>
+                                    <p>97.1% accuracy • 456 decisions</p>
+                                    <span class="agent-activity">Reallocated 3 rooms</span>
+                                </div>
+                            </div>
+                            <div class="agent-item">
+                                <div class="agent-status active"></div>
+                                <div class="agent-info">
+                                    <h4>Compliance Monitor</h4>
+                                    <p>99.1% accuracy • 234 decisions</p>
+                                    <span class="agent-activity">Generated audit report</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Workflow Automation -->
+                    <div class="admin-card">
+                        <div class="card__header">
+                            <h3>Automated Workflows</h3>
+                            <span class="automation-rate">82% Automated</span>
+                        </div>
+                        <div class="workflows-list">
+                            <div class="workflow-item">
+                                <div class="workflow-status active"></div>
+                                <div class="workflow-info">
+                                    <h4>Appointment Confirmation</h4>
+                                    <p>156 executions • 98.7% success</p>
+                                    <div class="workflow-progress">
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 98.7%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="workflow-item">
+                                <div class="workflow-status active"></div>
+                                <div class="workflow-info">
+                                    <h4>Insurance Verification</h4>
+                                    <p>43 executions • 94.2% success</p>
+                                    <div class="workflow-progress">
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 94.2%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="workflow-item">
+                                <div class="workflow-status active"></div>
+                                <div class="workflow-info">
+                                    <h4>Follow-up Care</h4>
+                                    <p>89 executions • 96.6% success</p>
+                                    <div class="workflow-progress">
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 96.6%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Edge Monitoring Tab -->
+            <div id="adminEdgeMonitoringTab" class="tab-content">
+                <div class="admin-monitoring-overview">
+                    <div class="admin-card wide">
+                        <div class="card__header">
+                            <h3>Edge Monitoring System Overview</h3>
+                            <div class="system-status">
+                                <span class="status status--success" id="edgeSystemStatus">Edge Devices Online</span>
+                            </div>
+                        </div>
+                        <div class="edge-overview-grid">
+                            <div class="edge-metric">
+                                <span class="metric-value" id="connectedDevices">3</span>
+                                <span class="metric-label">Connected Devices</span>
+                            </div>
+                            <div class="edge-metric">
+                                <span class="metric-value" id="activeAlerts">0</span>
+                                <span class="metric-label">Active Alerts</span>
+                            </div>
+                            <div class="edge-metric">
+                                <span class="metric-value" id="dataPoints">0</span>
+                                <span class="metric-label">Data Points/min</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Appointment Booking Modal -->
+    <div id="appointmentModal" class="modal hidden">
+        <div class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Book New Appointment</h3>
+                    <button class="modal-close" id="closeModal" aria-label="Close modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="booking-form">
+                        <div class="form-group">
+                            <label class="form-label">What brings you in today?</label>
+                            <select class="form-control" id="appointmentReason">
+                                <option>Select reason for visit</option>
+                                <option>Follow-up appointment</option>
+                                <option>New health concern</option>
+                                <option>Annual physical</option>
+                                <option>Specialist consultation</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Preferred Provider</label>
+                            <div class="provider-grid">
+                                <div class="provider-option" data-provider="chen">
+                                    <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=150&h=150&fit=crop&crop=face" alt="Dr. Chen" class="provider-avatar">
+                                    <div class="provider-info">
+                                        <h4>Dr. Michael Chen</h4>
+                                        <p>Cardiology</p>
+                                        <span class="provider-rating">4.9 ⭐</span>
+                                        <span class="provider-availability">Available tomorrow</span>
+                                    </div>
+                                </div>
+                                <div class="provider-option" data-provider="rodriguez">
+                                    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face" alt="Dr. Rodriguez" class="provider-avatar">
+                                    <div class="provider-info">
+                                        <h4>Dr. Emily Rodriguez</h4>
+                                        <p>Family Medicine</p>
+                                        <span class="provider-rating">4.8 ⭐</span>
+                                        <span class="provider-availability">Available this week</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ai-suggestions">
+                            <div class="suggestion-header">
+                                <span class="ai-badge">AI Recommended</span>
+                                <h4>Best Available Times</h4>
+                            </div>
+                            <div class="time-suggestions">
+                                <button class="time-suggestion optimal" data-time="Aug 20, 9:00 AM">
+                                    <span class="suggestion-time">Aug 20, 9:00 AM</span>
+                                    <span class="suggestion-label">Optimal</span>
+                                </button>
+                                <button class="time-suggestion good" data-time="Aug 20, 2:30 PM">
+                                    <span class="suggestion-time">Aug 20, 2:30 PM</span>
+                                    <span class="suggestion-label">Good</span>
+                                </button>
+                                <button class="time-suggestion available" data-time="Aug 21, 11:00 AM">
+                                    <span class="suggestion-time">Aug 21, 11:00 AM</span>
+                                    <span class="suggestion-label">Available</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn--outline" id="cancelBooking" aria-label="Cancel booking">Cancel</button>
+                    <button class="btn btn--primary" id="confirmBooking" aria-label="Confirm appointment">Confirm Appointment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Health Record Modal -->
+    <div id="healthRecordModal" class="modal hidden">
+        <div class="modal-overlay">
+            <div class="modal-content large-modal">
+                <div class="modal-header">
+                    <h3>Full Health Record - Khushi Thakur</h3>
+                    <button class="modal-close" id="closeHealthRecord" aria-label="Close health record">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div id="healthRecordContent" class="health-record-content"></div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn--outline" id="closeHealthRecordBtn" aria-label="Close record">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- John Miller Chart Modal -->
+    <div id="johnChartModal" class="modal hidden">
+        <div class="modal-overlay">
+            <div class="modal-content large-modal">
+                <div class="modal-header">
+                    <h3>John Miller - Patient Chart</h3>
+                    <button class="modal-close" id="closeJohnChart" aria-label="Close chart">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="chart-container" style="position: relative; height: 400px;">
+                        <canvas id="johnMillerChart"></canvas>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn--outline" id="closeJohnChartBtn" aria-label="Close chart">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Medication Review Modal -->
+    <div id="medicationModal" class="modal hidden">
+        <div class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Medication Interaction Review</h3>
+                    <button class="modal-close" id="closeMedication" aria-label="Close medication review">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div id="medicationContent" class="medication-content"></div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn--outline" id="closeMedicationBtn" aria-label="Close review">Close</button>
+                    <button class="btn btn--primary" id="updateMedication" aria-label="Update medications">Update Medications</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
